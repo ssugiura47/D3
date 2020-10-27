@@ -49,8 +49,6 @@ function init(){
       .range([height, 0]);
    
     console.log(data)  
-    console.log(d3.max(data, d => d.poverty))
-    console.log(d3.max(data, d => d.healthcare))
 
     // Create scale functions
     // var xLinearScale = d3.scaleLinear()
@@ -59,7 +57,7 @@ function init(){
       
     // var yLinearScale = d3.scaleLinear()
     //   .domain([0, d3.max(data, d => d.healthcare)])
-    //   .range([height, 0]);
+    //   .range([height,0]);
 
     // Create axis functions
     var bottomAxis = d3.axisBottom(xLinearScale);
@@ -81,8 +79,18 @@ function init(){
     .attr("cx", d => xLinearScale(d.poverty))
     .attr("cy", d => yLinearScale(d.healthcare))
     .attr("r", "15")
-    .attr("fill", "blue")
-    .attr("opacity", ".5");
+    .attr("opacity", ".5")
+    .classed("stateCircle", true)
+
+    var circleText = chartGroup.selectAll("stateText")
+    .data(data)
+    .enter()
+    .append("text")
+    .attr("dx", d => xLinearScale(d.poverty))
+    .attr("dy", d => yLinearScale(d.healthcare)+5)
+    .text(d => d.abbr)
+    .classed("stateText", true)
+  
 
     // Initialize tool tip
     var toolTip = d3.tip()
@@ -96,7 +104,7 @@ function init(){
     chartGroup.call(toolTip);
 
     // Create event listeners to display and hide the tooltip
-    circlesGroup.on("click", function(data) {
+    circlesGroup.on("mouseover", function(data) {
       toolTip.show(data, this);
     })
     // onmouseout event
@@ -108,7 +116,7 @@ function init(){
     chartGroup.append("text")
       .attr("transform", "rotate(-90)")
       .attr("y", 0 - margin.left + 40)
-      .attr("x", 0 - (height / 2))
+      .attr("x", 0 - (height / 2) - 45)
       .attr("dy", "1em")
       .attr("class", "axisText")
       .text("Lack of Healthcare (%)");

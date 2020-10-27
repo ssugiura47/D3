@@ -40,6 +40,11 @@
   margin: 0;
 }
 
+.axisText{
+  font-size: 16px;
+  font-weight: bold;
+}
+
 .d3-tip {
   padding: 6px;
   font-size: 12px;
