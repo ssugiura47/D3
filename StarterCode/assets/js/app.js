@@ -39,6 +39,7 @@ function init(){
 
     getData();
 
+    // console.log(poverty)
     // Create scale functions
     var xLinearScale = d3.scaleLinear()
       .domain([0, 25])
@@ -47,16 +48,20 @@ function init(){
     var yLinearScale = d3.scaleLinear()
       .domain([0, 30])
       .range([height, 0]);
-   
-    console.log(data)  
 
-    // Create scale functions
+    // Format the date and cast the force value to a number
+    // data.forEach(function(d) {
+    //   d.poverty = +d.poverty
+    //   d.healtcare = +d.healtcare
+    // });
+    
+    // // Create scale functions
     // var xLinearScale = d3.scaleLinear()
-    //   .domain(d3.extent(data, d => d.poverty))
+    //   .domain(d3.extent(data, d => +d.poverty))
     //   .range([0, width]);
       
     // var yLinearScale = d3.scaleLinear()
-    //   .domain([0, d3.max(data, d => d.healthcare)])
+    //   .domain([0, d3.max(data, d => +d.healthcare)])
     //   .range([height,0]);
 
     // Create axis functions
